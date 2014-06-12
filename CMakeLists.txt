@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 project(smithy)
 
-if(CMAKE_BUILD_TYPE STREQUAL "")
-  set(CMAKE_BUILD_TYPE Debug)
-endif()
+set(LTO_FLAGS "-flto -fno-use-linker-plugin -fwhole-program")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -pthread -std=c++11 -pedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG -march=native ${LTO_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELEASE "-O4 -DNDEBUG -march=native ${LTO_FLAGS}")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${LTO_FLAGS}")
+set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--no-undefined -O2")
+set(CMAKE_EXE_LINKER_FLAGS "${LTO_FLAGS}")
+set(CMAKE_MODULE_LINKER_FLAGS "${LTO_FLAGS}")
 
 # Set version information in a config.h file
 set(smithy_VERSION_MAJOR 0)
@@ -15,8 +21,6 @@ configure_file(
 include_directories("${PROJECT_BINARY_DIR}")
 
 set(CMAKE_MODULE_PATH "/usr/share/SFML/cmake/Modules/")
-
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -pthread -std=c++11 -pedantic")
 
 # Check if the compiler supports regex and auto return type deduction
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
@@ -56,8 +60,4 @@ target_link_libraries(smithy smith)
 
 install(TARGETS ${EXECUTABLE_NAME} DESTINATION bin)
 
-include(InstallRequiredSystemLibraries)
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
-set(CPACK_PACKAGE_VERSION_MAJOR "${smithy_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${smithy_VERSION_MINOR}")
-include(CPack)
+include(DebPack.cmake)
