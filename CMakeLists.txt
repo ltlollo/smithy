@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
+
 project(smithy)
+
+include(Compiler.cmake)
 
 set(LTO_FLAGS "-flto -fno-use-linker-plugin -fwhole-program")
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -pthread -std=c++11 -pedantic")
@@ -14,6 +17,7 @@ set(CMAKE_MODULE_LINKER_FLAGS "${LTO_FLAGS}")
 # Set version information in a config.h file
 set(smithy_VERSION_MAJOR 0)
 set(smithy_VERSION_MINOR 1)
+
 configure_file(
   "${PROJECT_SOURCE_DIR}/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h"
@@ -21,24 +25,6 @@ configure_file(
 include_directories("${PROJECT_BINARY_DIR}")
 
 set(CMAKE_MODULE_PATH "/usr/share/SFML/cmake/Modules/")
-
-# Check if the compiler supports regex and auto return type deduction
-if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
-    execute_process(
-        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
-    if (NOT (GCC_VERSION VERSION_GREATER 4.8 OR GCC_VERSION VERSION_EQUAL 4.8))
-        message(FATAL_ERROR "${PROJECT_NAME} requires g++ 4.8 or greater.")
-    endif ()
-elseif ("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-    execute_process(
-        COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE CLANG_VERSION)
-    if (NOT (CLANG_VERSION VERSION_GREATER 3.3 OR CLANG_VERSION VERSION_EQUAL 3.3))
-        message(FATAL_ERROR "${PROJECT_NAME} requires clang++ 3.3 or greater.")
-    endif ()
-else ()
-    message(FATAL_ERROR "Your c++ compiler does not support C++11.")
-endif ()
 
 # Define sources and executable
 set(EXECUTABLE_NAME "smithy")
