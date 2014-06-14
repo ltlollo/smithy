@@ -218,10 +218,10 @@ void SmithChart::display()
                 case Keyboard::Right:       // Move the last obj to the right
                     moveCurrObj<right>();
                     break;
-                case Keyboard::Add:         // Increase the last obj's size
+                case Keyboard::Z:         // Increase the last obj's size
                     resizeCurrObj<inflate>();
                     break;
-                case Keyboard::Subtract:    // Decrease the last obj's size
+                case Keyboard::D:    // Decrease the last obj's size
                     resizeCurrObj<deflate>();
                     break;
                 case Keyboard::PageDown:    // Rotate last obj clockwise

@@ -20,8 +20,8 @@
 - Down      : Move the last obj down
 - Left      : Move the last obj to the left
 - Right     : Move the last obj to the right
-- Add       : Increase the last obj's size
-- Subtract  : Decrease the last obj's size
+- Z         : Increase the last obj's size
+- D         : Decrease the last obj's size
 - PageDown  : Rotate last obj clockwise
 - PageUp    : Rotate last obj anti-clockwise
 - N         : Select next object;
