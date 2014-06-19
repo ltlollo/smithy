@@ -48,7 +48,7 @@ Circle<SCircle>::Circle(const Vector2i& p, const CStyle style)
     : color(style == CStyle::Background ? Color(0, 0, 0xCA, 50) :
                                       Color::Transparent)
 {
-    int x = halfWin - p.x, y = halfWin - p.y;
+    int x{halfWin - p.x}, y{halfWin - p.y};
     double ang{get_angle(x,y)};
     float r = halfWin/2;
     float x_d = r*cos(ang), y_d = r*sin(ang);

@@ -262,7 +262,7 @@ void SmithChart::addCLine()
 {
     unmarkCurrObj();
     Vector2i pos{mouse.getPosition(window)};
-    float x = halfWin - pos.x, y = halfWin - pos.y;
+    int x{halfWin - pos.x}, y{halfWin - pos.y};
     double ang = radDeg*get_angle(x, y);
     usrLines.emplace_back(ThickLine(ang).getShape());
     actions.emplace_back(typeLine);

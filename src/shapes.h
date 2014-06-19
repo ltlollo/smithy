@@ -18,6 +18,11 @@ public:
     double get_g(const sf::Vector2i& p) const noexcept;
     double get_x(const sf::Vector2i& p) const noexcept;
     double get_angle(const double x, const double y) const noexcept;
+    template <typename T>
+    double get_angle(const sf::Vector2<T> p) const noexcept
+    {
+        return atan2(p.y, p.x);
+    }
 };
 
 class ThickLine
