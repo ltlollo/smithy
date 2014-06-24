@@ -31,9 +31,9 @@ class ThickLine
 
 public:
     ThickLine(const double ang);
-    sf::RectangleShape getShape() &&
+    sf::RectangleShape&& getShape() &&
     {
-        return line;
+        return std::move(line);
     }
 };
 
@@ -46,9 +46,9 @@ class Circle final: public CoordTrans
 public:
     Circle(const double d, const CStyle style=CStyle::Grid);
     Circle(const sf::Vector2i& p, const CStyle style);
-    sf::CircleShape getShape() &&
+    sf::CircleShape&& getShape() &&
     {
-        return shape;
+        return std::move(shape);
     }
 };
 
