@@ -34,6 +34,8 @@ SmithChart::SmithChart()
       showOutline{true},  currentObj{-1},
       inside{Color(0,0,0xCA, 50)}, insideOutline{Color(0xCA,0,0,50)}
 {
+    window.setFramerateLimit(30);
+
     font.loadFromFile(fontFile);
     coord = Text{{}, font, 10};
     coord.setColor(Color(0x99, 0x00, 0x00));
