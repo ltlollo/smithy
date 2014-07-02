@@ -4,8 +4,9 @@ project(smithy)
 
 include(Compiler.cmake)
 
-set(smithy_VERSION_MAJOR 1)
-set(smithy_VERSION_MINOR 0)
+set(VERSION_MAJOR "1")
+set(VERSION_MINOR "0")
+set(VERSION_PATCH "1")
 
 include_directories(${PROJECT_SOURCE_DIR}/src)
 add_subdirectory(src)
